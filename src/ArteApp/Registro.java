@@ -95,9 +95,9 @@ public class Registro extends JFrame {
 	    placeholderE.changeStyle(Font.ITALIC);
 		Edad.setColumns(10);
 		
-		JComboBox sexo = new JComboBox();
+		JComboBox<String> sexo = new JComboBox<String>();
 		
-		JComboBox region = new JComboBox();
+		JComboBox<String> region = new JComboBox<String>();
 		
 		JLabel label_1 = new JLabel("", SwingConstants.CENTER);
 		label_1.setIcon(new ImageIcon(Registro.class.getResource("/botones/icons8-help.png")));

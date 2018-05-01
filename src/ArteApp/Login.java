@@ -27,6 +27,8 @@ import java.net.URL;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 
+import connection.ConnectionManager;
+
 public class Login extends JFrame {
 
 	/**
@@ -109,41 +111,14 @@ public class Login extends JFrame {
 				aceptar.setBackground(new Color(0, 204, 0));
 			}
 			public void mouseClicked(MouseEvent e) {
-				try {
-					String userName = NuUsuario.getText().toString();
-					String pass = String.valueOf(password.getPassword());
-					URL url = new URL("http://localhost:8000/make_connection?username=" + userName + "&pais=" + pass);
-					HttpURLConnection con = (HttpURLConnection) url.openConnection();
-					con.setRequestMethod("GET");
-					int responseCode = con.getResponseCode();
-					if (responseCode == HttpURLConnection.HTTP_OK)
-					{
-						BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-						String inputLine;
-						StringBuffer response = new StringBuffer();
-						while ((inputLine = in.readLine()) != null)
-							response.append(inputLine);
-						in.close();
-						if (response.toString().equals("Login Ok"))
-						{
-							PanelPrincipal p = new PanelPrincipal(480, 720);
-							p.setVisible(true);
-							dispose();
-						}
-						else
-							JOptionPane.showMessageDialog(null, response.toString());
-					}
-					else
-						JOptionPane.showMessageDialog(null, "Response Code: " + responseCode + "\n Unable to connect to remote host");
-					
-					
-				} catch (MalformedURLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				String nickName;
+				String password;
+				String pais;
+				ConnectionManager.login();
+					/*
+					 * PanelPrincipal p = new PanelPrincipal(480, 720);
+					p.setVisible(true);
+					dispose();*/
 			}
 		});
 		
