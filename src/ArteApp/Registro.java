@@ -30,12 +30,15 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import connection.ConnectionManager;
+
 public class Registro extends JFrame {
 	JFrame frame;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private JPanel contentPane;
 	private JTextField Nombre;
 	private JTextField Nusuario;
@@ -44,6 +47,8 @@ public class Registro extends JFrame {
 	private JRadioButton ATC;
 	private JTextField Edad;
 	String ruta = "";
+	JComboBox<String> sexo;
+	JComboBox<String> region;
 
 	/**
 	 * Create the frame.
@@ -95,9 +100,8 @@ public class Registro extends JFrame {
 	    placeholderE.changeStyle(Font.ITALIC);
 		Edad.setColumns(10);
 		
-		JComboBox<String> sexo = new JComboBox<String>();
-		
-		JComboBox<String> region = new JComboBox<String>();
+		sexo = new JComboBox<String>();
+		region = new JComboBox<String>();
 		
 		JLabel label_1 = new JLabel("", SwingConstants.CENTER);
 		label_1.setIcon(new ImageIcon(Registro.class.getResource("/botones/icons8-help.png")));
@@ -136,7 +140,7 @@ public class Registro extends JFrame {
 		JButton aceptar = new JButton("Aceptar");
 		aceptar.setIcon(new ImageIcon(Registro.class.getResource("/botones/icons8-ok.png")));
 		
-		JButton cancelar = new JButton("Cancelar");
+		JButton cancelar = new JButton("");
 		cancelar.setIcon(new ImageIcon(Registro.class.getResource("/botones/icons8-cancel.png")));
 		
 		final JLabel imagen = new JLabel("Imagen de Perfil", SwingConstants.CENTER);
@@ -172,72 +176,77 @@ public class Registro extends JFrame {
 							.addGap(6)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(10)
+									.addComponent(label_2)
 									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-										.addComponent(label, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
 										.addGroup(gl_panel.createSequentialGroup()
-											.addGap(10)
-											.addComponent(label_2)))
-									.addGap(59)
-									.addComponent(Lregistro, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-									.addGap(141))
+											.addGap(72)
+											.addComponent(Lregistro, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+											.addGap(141))
+										.addGroup(gl_panel.createSequentialGroup()
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(label, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE))))
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(18)
 									.addComponent(lblNomicono, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 									.addGap(4)
-									.addComponent(Nombre, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE))
+									.addComponent(Nombre, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(18)
 									.addComponent(lblUsericono, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 									.addGap(4)
-									.addComponent(Nusuario, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE))
+									.addComponent(Nusuario, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(18)
 									.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 									.addGap(4)
-									.addComponent(password, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE))
+									.addComponent(password, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(18)
 									.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 									.addGap(4)
-									.addComponent(Correo, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE))
+									.addComponent(Correo, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(18)
 									.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 									.addGap(4)
-									.addComponent(Edad, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE))
+									.addComponent(Edad, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(18)
 									.addComponent(label_5, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 									.addGap(4)
-									.addComponent(sexo, 0, 328, Short.MAX_VALUE))
+									.addComponent(sexo, 0, 324, Short.MAX_VALUE))
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(18)
 									.addComponent(label_6, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 									.addGap(4)
-									.addComponent(region, 0, 328, Short.MAX_VALUE))))
+									.addComponent(region, 0, 324, Short.MAX_VALUE))))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(24)
 							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(ATC, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+							.addComponent(ATC, GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)))
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(27)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnSleccionarImagen, GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addGap(6)
-									.addComponent(imagen, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE))))
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
 							.addComponent(lblRegistroicono, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
 							.addGap(11))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(27)
-							.addComponent(aceptar, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-							.addGap(12)
-							.addComponent(cancelar, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)))
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(27)
+									.addComponent(aceptar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addGap(12)
+									.addComponent(cancelar, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE))
+								.addGroup(Alignment.LEADING, gl_panel.createParallelGroup(Alignment.LEADING, false)
+									.addGroup(gl_panel.createSequentialGroup()
+										.addGap(27)
+										.addComponent(btnSleccionarImagen, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+									.addGroup(gl_panel.createSequentialGroup()
+										.addGap(33)
+										.addComponent(imagen, GroupLayout.PREFERRED_SIZE, 262, GroupLayout.PREFERRED_SIZE))))
+							.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
@@ -247,70 +256,70 @@ public class Registro extends JFrame {
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addGap(44)
-									.addComponent(label, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE))
 								.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panel.createSequentialGroup()
-									.addGap(85)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(label, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
 									.addComponent(Lregistro)))
 							.addGap(17)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblNomicono, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(5)
-									.addComponent(Nombre)))
+									.addComponent(Nombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 							.addGap(7)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblUsericono, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(5)
-									.addComponent(Nusuario)))
+									.addComponent(Nusuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 							.addGap(1)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(11)
-									.addComponent(password, GroupLayout.PREFERRED_SIZE, 20, Short.MAX_VALUE)))
+									.addComponent(password, GroupLayout.PREFERRED_SIZE, 54, Short.MAX_VALUE)))
 							.addGap(7)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(5)
-									.addComponent(Correo)))
+									.addComponent(Correo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 							.addGap(8)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(5)
-									.addComponent(Edad)))
+									.addComponent(Edad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 							.addGap(9)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(label_5, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(4)
-									.addComponent(sexo)))
+									.addComponent(sexo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 							.addGap(5)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(label_6, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(3)
-									.addComponent(region)
-									.addGap(1)))
-							.addGap(5))
+									.addComponent(region, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addGap(6))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblRegistroicono, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(imagen, GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+							.addComponent(imagen, GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
 							.addGap(11)
-							.addComponent(btnSleccionarImagen, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(btnSleccionarImagen, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)))
 					.addGap(9)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-						.addGroup(Alignment.TRAILING, gl_panel.createParallelGroup(Alignment.BASELINE)
-							.addComponent(aceptar, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-							.addComponent(ATC, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(aceptar, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+								.addComponent(ATC, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 						.addComponent(cancelar, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE))
 					.addGap(3))
 		);
@@ -323,13 +332,28 @@ public class Registro extends JFrame {
 				l.setVisible(true);
 			}
 		});
+		
 		aceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login l = new Login();
-				l.setVisible(true);
-				frame.dispose();
+				if (validateForm()) {
+					String name = Nombre.getText().toString();
+					String nickName = Nusuario.getText().toString();
+					String pass = String.valueOf(password.getPassword());
+					String mail = Correo.getText().toString();
+					String edad = Edad.getText().toString();
+					String sex = sexo.getSelectedItem().toString();
+					String country = region.getSelectedItem().toString();
+					if (ConnectionManager.Register(name, nickName, pass, mail, edad, sex, country)) {
+						Login l = new Login();
+						l.setVisible(true);
+						frame.dispose();
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Todos los campos deben ser llenados");
+				}
 			}
 		});
+		
 		btnSleccionarImagen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				chosser cho = new chosser();
@@ -341,10 +365,28 @@ public class Registro extends JFrame {
 					Icon iconot = new ImageIcon(fott.getImage().getScaledInstance(imagen.getWidth(), imagen.getHeight(), Image.SCALE_DEFAULT));
 					imagen.setIcon(iconot);					
 				}
-				//cho.frame2.setVisible(true);
 			}
 		});
-		
-		//frame.setUndecorated(true);
+		fillGenreComboBox();
+		fillCountryComboBox();
 	}
+	
+	private void fillGenreComboBox() {
+		sexo.addItem("Femenino");
+		sexo.addItem("Masculino");
+	}
+	
+	private void fillCountryComboBox() {
+		region.addItem("Mexico");
+		region.addItem("Egipto");
+		region.addItem("Indio");
+	}
+	
+	public boolean validateForm(){
+		return (!Nombre.getText().toString().equals("") && !Nusuario.getText().equals("")
+							&& !String.valueOf(password.getPassword()).equals("") && 
+							!Correo.getText().toString().equals("")
+							&& !Edad.getText().toString().equals(""));
+	}
+	
 }

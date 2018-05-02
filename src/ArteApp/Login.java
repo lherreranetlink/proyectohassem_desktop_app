@@ -109,7 +109,7 @@ public class Login extends JFrame {
 				String pass = String.valueOf(password.getPassword());
 				String pais = comboBoxPaises.getSelectedItem().toString();
 				
-				if (ConnectionManager.login(nickName, pass, pais)) {
+				if (ConnectionManager.Login(nickName, pass, pais)) {
 					PanelPrincipal p = new PanelPrincipal(480, 720);
 					p.setVisible(true);
 					dispose();
