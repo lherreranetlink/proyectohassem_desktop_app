@@ -17,12 +17,6 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -111,14 +105,15 @@ public class Login extends JFrame {
 				aceptar.setBackground(new Color(0, 204, 0));
 			}
 			public void mouseClicked(MouseEvent e) {
-				String nickName;
-				String password;
-				String pais;
-				ConnectionManager.login();
-					/*
-					 * PanelPrincipal p = new PanelPrincipal(480, 720);
+				String nickName = NuUsuario.getText().toString();
+				String pass = String.valueOf(password.getPassword());
+				String pais = comboBoxPaises.getSelectedItem().toString();
+				
+				if (ConnectionManager.login(nickName, pass, pais)) {
+					PanelPrincipal p = new PanelPrincipal(480, 720);
 					p.setVisible(true);
-					dispose();*/
+					dispose();
+				}
 			}
 		});
 		

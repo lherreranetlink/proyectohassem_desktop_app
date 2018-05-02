@@ -8,6 +8,10 @@ import java.net.URL;
 
 import javax.swing.JOptionPane;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import constants.Constants;
 
 
@@ -15,7 +19,9 @@ public class ConnectionManager {
 	
 	public static boolean login(String nickName, String password, String pais) {
 		
-		String urlString = "http://" + Constants.ip_address + ":" + Constants.http_port + "/make_connection?username=" + nickName + "&password="  + password;
+		String urlString = "http://" + Constants.ip_address + ":" + Constants.http_port + "/try_login?nick_name=" 
+		+ nickName + "&password="  + password + "&pais=" + pais;
+		
 		try {
 			URL url;
 			url = new URL(urlString);
@@ -33,21 +39,30 @@ public class ConnectionManager {
 					response.append(inputLine);
 				
 				in.close();
-				System.out.println("Response: " + response);
-				/*if (response.toString().equals("Login Ok"))
+				JSONParser parser = new JSONParser();
+				Object obj = parser.parse(response.toString());
+				
+				JSONObject json = (JSONObject) obj;
+				String status = (String) json.get("status");
+				
+				if (status.equals("Success")) {
+					String ipAddress = (String) json.get("ip_address");
+					String httpPort = (String) json.get("http_port");
+					Constants.setIpAddress(ipAddress);
+					Constants.setHttpPort(httpPort);
 					return true;
-				else
-				{
-					JOptionPane.showMessageDialog(null, response.toString());
+				} else {
+					String lala = (String) json.get("message");
+					JOptionPane.showMessageDialog(null, lala);
 					return false;
-				}*/
+				}
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "Response Code: " + responseCode + "\n Unable to connect to remote host");
 				return false;
 			}
 			
-		} catch (IOException e) {
+		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}
 		return false;
