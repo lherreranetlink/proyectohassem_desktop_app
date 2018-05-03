@@ -24,8 +24,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -52,6 +56,7 @@ public class Registro extends JFrame {
 	private JTextField Correo;
 	private JRadioButton ATC;
 	private JTextField Edad;
+	private String profilePhotoString = null;
 	String ruta = "";
 	JComboBox<String> sexo;
 	JComboBox<String> region;
@@ -347,7 +352,8 @@ public class Registro extends JFrame {
 					String pass = String.valueOf(password.getPassword());
 					String mail = Correo.getText().toString();
 					String country = region.getSelectedItem().toString();
-					if (ConnectionManager.Register(name, nickName, pass, mail, country)) {
+					if (ConnectionManager.Register(name, nickName, pass, mail, country, 
+							profilePhotoString)) {
 						Login l = new Login();
 						l.setVisible(true);
 						frame.dispose();
@@ -368,23 +374,18 @@ public class Registro extends JFrame {
 					ImageIcon fott = new ImageIcon(ruta);
 					Icon iconot = new ImageIcon(fott.getImage().getScaledInstance(imagen.getWidth(), imagen.getHeight(), Image.SCALE_DEFAULT));
 					imagen.setIcon(iconot);
-					BufferedImage image = new BufferedImage(fott.getIconWidth(),fott.getIconHeight(), 
-							BufferedImage.TYPE_INT_RGB);
-					
-					String imageString = null;
-			        ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			        
-			        try {
-						ImageIO.write(image, "jpeg", bos);
-						byte[] imageBytes = bos.toByteArray();
-						
-
-			            BASE64Encoder encoder = new BASE64Encoder();
-			            imageString = encoder.encode(imageBytes);
-
-			            bos.close();
-			            
-			            System.out.println("Lala: " + imageString);
+			        try { 
+						File fnew = new File(ruta);
+						BufferedImage originalImage = ImageIO.read(fnew);
+						ByteArrayOutputStream baos = new ByteArrayOutputStream();
+						ImageIO.write(originalImage, "jpg", baos );
+						byte[] imageInByte = baos.toByteArray();
+						BASE64Encoder encoder = new BASE64Encoder();
+						profilePhotoString = encoder.encode(imageInByte);
+						//System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("console.out")), true));
+						//System.out.print(profilePhotoString);
+						 
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
@@ -410,7 +411,7 @@ public class Registro extends JFrame {
 		return (!Nombre.getText().toString().equals("") && !Nusuario.getText().equals("")
 							&& !String.valueOf(password.getPassword()).equals("") && 
 							!Correo.getText().toString().equals("")
-							&& !Edad.getText().toString().equals(""));
+							&& !Edad.getText().toString().equals("") && profilePhotoString != null);
 	}
 	
 }
