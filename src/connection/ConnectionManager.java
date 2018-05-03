@@ -68,13 +68,11 @@ public class ConnectionManager {
 		return false;
 	}
 	
-	public static boolean Register(String nombre, String nickName, String password, 
-								String correo, String edad, String sexo, String region) {
+	public static boolean Register(String nombre, String nickName, String password, String correo, String pais) {
 		
 		String urlString = "http://" + Constants.ip_address + ":" + Constants.http_port + "/register"
 		+ "?nombre=" + nombre + "&nick_name=" + nickName + "&password=" + password + "&correo=" + correo
-		+ "&edad=" + edad + "&sexo=" + sexo + "&region=" + region;
-		
+		+ "&pais=" + pais;
 		URL url;
 		try {
 			url = new URL(urlString);

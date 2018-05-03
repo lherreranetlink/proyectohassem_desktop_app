@@ -2,6 +2,7 @@ package ArteApp;
 
 import java.awt.Color;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -22,6 +23,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -29,6 +33,8 @@ import javax.swing.ImageIcon;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import sun.misc.BASE64Encoder;
 
 import connection.ConnectionManager;
 
@@ -340,10 +346,8 @@ public class Registro extends JFrame {
 					String nickName = Nusuario.getText().toString();
 					String pass = String.valueOf(password.getPassword());
 					String mail = Correo.getText().toString();
-					String edad = Edad.getText().toString();
-					String sex = sexo.getSelectedItem().toString();
 					String country = region.getSelectedItem().toString();
-					if (ConnectionManager.Register(name, nickName, pass, mail, edad, sex, country)) {
+					if (ConnectionManager.Register(name, nickName, pass, mail, country)) {
 						Login l = new Login();
 						l.setVisible(true);
 						frame.dispose();
@@ -363,7 +367,27 @@ public class Registro extends JFrame {
 					imagen.setText(null);
 					ImageIcon fott = new ImageIcon(ruta);
 					Icon iconot = new ImageIcon(fott.getImage().getScaledInstance(imagen.getWidth(), imagen.getHeight(), Image.SCALE_DEFAULT));
-					imagen.setIcon(iconot);					
+					imagen.setIcon(iconot);
+					BufferedImage image = new BufferedImage(fott.getIconWidth(),fott.getIconHeight(), 
+							BufferedImage.TYPE_INT_RGB);
+					
+					String imageString = null;
+			        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			        
+			        try {
+						ImageIO.write(image, "jpeg", bos);
+						byte[] imageBytes = bos.toByteArray();
+						
+
+			            BASE64Encoder encoder = new BASE64Encoder();
+			            imageString = encoder.encode(imageBytes);
+
+			            bos.close();
+			            
+			            System.out.println("Lala: " + imageString);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
