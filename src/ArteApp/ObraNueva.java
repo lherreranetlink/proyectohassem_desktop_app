@@ -20,11 +20,14 @@ import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JProgressBar;
+
+import sun.misc.BASE64Encoder;
 
 public class ObraNueva extends JFrame {
 
@@ -34,6 +37,7 @@ public class ObraNueva extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField titulo;
+	String profilePhotoString = null;
 	String ruta = null;
 	//FileNameExtensionFilter filtroImagen = new FileNameExtensionFilter("JPG, PNG & GIF","jpg","png","gif");
 	String nombreImagen = null;
@@ -203,7 +207,13 @@ public class ObraNueva extends JFrame {
 				if((ruta != null) && (nombreImagen != null))
 				{
 						try {
-							ImageIO.write(imagen, "jpg", new File("src/Imagenes/" + nombreImagen + ".jpg"));
+							BufferedImage originalImage = imagen;
+							ByteArrayOutputStream baos = new ByteArrayOutputStream();
+							ImageIO.write(originalImage, "jpg", baos );
+							byte[] imageInByte = baos.toByteArray();
+							BASE64Encoder encoder = new BASE64Encoder();
+							profilePhotoString = encoder.encode(imageInByte);
+							//ImageIO.write(imagen, "jpg", new File("src/Imagenes/" + nombreImagen + ".jpg"));
 							hiloProgressBar.start();
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block

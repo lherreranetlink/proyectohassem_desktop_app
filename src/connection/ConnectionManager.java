@@ -3,7 +3,6 @@ package connection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -27,6 +26,7 @@ public class ConnectionManager {
 		
 		String urlString = "http://" + Constants.ip_address + ":" + Constants.http_port + "/try_login?nick_name=" 
 		+ nickName + "&password="  + password + "&pais=" + pais;
+		System.out.println(urlString);
 		
 		try {
 			URL url;
@@ -54,8 +54,8 @@ public class ConnectionManager {
 				if (status.equals("Success")) {
 					String ipAddress = (String) json.get("ip_address");
 					String httpPort = (String) json.get("http_port");
-					Constants.setIpAddress(ipAddress);
-					Constants.setHttpPort(httpPort);
+					Constants.setIpAddressLocal(ipAddress);
+					Constants.setHttpPortLocal(httpPort);
 					return true;
 				} else {
 					String msg = (String) json.get("message");
@@ -87,7 +87,6 @@ public class ConnectionManager {
 		params.put("correo", correo);
 		params.put("pais", pais);
 		params.put("foto_perfil", profilePhoto);
-		System.out.println(profilePhoto);
 		
 		StringBuilder postData = new StringBuilder();
 		for (Map.Entry<String,Object> param : params.entrySet()) {
@@ -104,16 +103,47 @@ public class ConnectionManager {
         conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
         conn.setDoOutput(true);
         conn.getOutputStream().write(postDataBytes);
+        int responseCode = conn.getResponseCode();
         
-        Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-        /*for (int c; (c = in.read()) >= 0;)
-            System.out.print((char)c);*/
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+        	BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+			
+			while ((inputLine = in.readLine()) != null)
+				response.append(inputLine);
+			
+			in.close();
+			JSONParser parser = new JSONParser();
+			Object obj = parser.parse(response.toString());
+			
+			JSONObject json = (JSONObject) obj;
+			String status = (String) json.get("status");
+			
+			if (status.equals("Success")) {
+				String ipAddress = (String) json.get("ip_address");
+				String httpPort = (String) json.get("http_port");
+				Constants.setIpAddress(ipAddress);
+				Constants.setHttpPort(httpPort);
+				return true;
+			} else {
+				String msg = (String) json.get("message");
+				JOptionPane.showMessageDialog(null, msg);
+				return false;
+			}
+			
+        } else {
+        	JOptionPane.showMessageDialog(null, "Response Code: " + responseCode + "\n Unable to connect to remote host");
+			return false;
+        }
 		
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
         
