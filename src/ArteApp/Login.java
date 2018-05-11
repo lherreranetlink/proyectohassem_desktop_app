@@ -70,23 +70,18 @@ public class Login extends JFrame {
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
-		JLabel lblArteapp = new JLabel("ArteApp", SwingConstants.CENTER);
-		lblArteapp.setFont(new Font("SignPainter", Font.PLAIN, 40));
-		lblArteapp.setBounds(293, 71, 185, 67);
-		panel.add(lblArteapp);
-		
 		JLabel lblInicio = new JLabel("Iniciar Sesión", SwingConstants.CENTER);
 		lblInicio.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		lblInicio.setBounds(293, 137, 125, 35);
+		lblInicio.setBounds(293, 126, 125, 35);
 		panel.add(lblInicio);
 		
 		NuUsuario = new JTextField();
-		NuUsuario.setBounds(293, 184, 185, 43);
+		NuUsuario.setBounds(293, 173, 185, 43);
 		panel.add(NuUsuario);
 		NuUsuario.setColumns(10);
 		
 		password = new JPasswordField();
-		password.setBounds(293, 239, 185, 43);
+		password.setBounds(293, 228, 185, 43);
 		panel.add(password);
 		
 		final JLabel aceptar = new JLabel("Aceptar", SwingConstants.CENTER);
@@ -94,7 +89,7 @@ public class Login extends JFrame {
 		aceptar.setOpaque(true);
 		aceptar.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		aceptar.setBackground(new Color(0, 204, 0));
-		aceptar.setBounds(237, 343, 241, 43);
+		aceptar.setBounds(237, 329, 241, 43);
 		
 		aceptar.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
@@ -145,7 +140,7 @@ public class Login extends JFrame {
 			}
 		});
 		lblRegistrarse.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		lblRegistrarse.setBounds(237, 398, 241, 43);
+		lblRegistrarse.setBounds(237, 384, 241, 43);
 		lblRegistrarse.setOpaque(true);
 		lblRegistrarse.setBackground(new Color(0, 0, 255));
 		panel.add(lblRegistrarse);
@@ -185,18 +180,18 @@ public class Login extends JFrame {
 		panel.add(lblAcercaicono);
 		
 		JLabel lblIcono = new JLabel("");
-		lblIcono.setIcon(new ImageIcon(Login.class.getResource("/botones/icons8-modern_art.png")));
-		lblIcono.setBounds(303, 6, 96, 84);
+		lblIcono.setIcon(new ImageIcon(Login.class.getResource("/botones/logop.png")));
+		lblIcono.setBounds(293, 12, 125, 104);
 		panel.add(lblIcono);
 		
 		comboBoxPaises = new JComboBox<String>();
-		comboBoxPaises.setBounds(293, 294, 180, 35);
+		comboBoxPaises.setBounds(298, 283, 180, 35);
 		panel.add(comboBoxPaises);
 		
 		llenarComboPaises();
 		
 		JLabel lblPais = new JLabel("Pais");
-		lblPais.setBounds(247, 296, 38, 35);
+		lblPais.setBounds(247, 289, 38, 35);
 		panel.add(lblPais);
 		
 	}
