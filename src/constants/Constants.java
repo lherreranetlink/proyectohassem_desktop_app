@@ -2,11 +2,7 @@ package constants;
 
 public class Constants {
 	
-<<<<<<< HEAD
 	public static String ip_address = "192.168.1.70";
-=======
-	public static String ip_address = "192.168.43.224";
->>>>>>> 561cceed367537afce6978aad011a2253c70a5a0
 	public static String http_port = "8080";
 	public static String ip_address_local = "";
 	public static String http_port_local = "";
