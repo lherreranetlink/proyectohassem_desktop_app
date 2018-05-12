@@ -27,10 +27,8 @@ public class ConnectionManager {
 	
 	public static boolean Login(String nickName, String password, String pais) {
 		
-		System.out.println(Constants.ip_address);
 		String urlString = "http://" + Constants.ip_address + ":" + Constants.http_port + "/try_login?nick_name=" 
 		+ nickName + "&password="  + password + "&pais=" + pais;
-		System.out.println(urlString);
 		
 		try {
 			URL url;
@@ -156,6 +154,7 @@ public class ConnectionManager {
 	public static boolean newCanvas(String titulo, String newPhoto){
 		
 		String urlString = "http://" + Constants.ip_address_local + ":" + Constants.http_port_local + "/obras/subir_foto";
+		System.out.println("Upload photo url: " + urlString);
 		try {
 			URL url = new URL(urlString);
 			System.out.println(urlString);
@@ -224,6 +223,57 @@ public class ConnectionManager {
 		}
 		
 		return false;
+	}
+	
+	public static JSONObject getTop10Images()
+	{
+		String urlString = "http://" + Constants.ip_address_local + ":" + Constants.http_port_local + "/get_top_10";
+		try {
+			URL url;
+			url = new URL(urlString);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("GET");
+			int responseCode = con.getResponseCode();
+			
+			if (responseCode == HttpURLConnection.HTTP_OK)
+			{
+				
+				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				String inputLine;
+				StringBuffer response = new StringBuffer();
+				
+				while ((inputLine = in.readLine()) != null)
+					response.append(inputLine);
+				
+				in.close();
+				System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("console.out")), true));
+				System.out.println(response);
+				/*JSONParser parser = new JSONParser();
+				Object obj = parser.parse(response.toString());
+				
+				JSONObject json = (JSONObject) obj;
+				String status = (String) json.get("status");
+				
+				if (status.equals("Success")) {
+					String ipAddress = (String) json.get("ip_address");
+					String httpPort = (String) json.get("http_port");
+					String userId = Long.toString((Long) json.get("user_id"));
+					Constants.setIpAddressLocal(ipAddress);
+					Constants.setHttpPortLocal(httpPort);
+					Constants.setUserId(userId);
+				} else {
+					String msg = (String) json.get("message");
+					JOptionPane.showMessageDialog(null, msg);
+				}*/
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Response Code: " + responseCode + "\n Unable to connect to remote host");
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 }

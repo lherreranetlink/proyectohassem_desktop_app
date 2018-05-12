@@ -21,15 +21,15 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class PanelPrincipal extends JFrame {
 
-	//JFrame frame2;
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	JLabel lblImagen, label_1, lblImagen_1, lblImagen_2, lblImagen_3, lblImagen_4, lblImagen_5, lblImagen_6, lblImagen_7;
+	JLabel lblNombreImagen, label, label_2, label_3, label_4, label_5, label_6, label_7, label_8;
 
 	/**
 	 * Create the frame.
 	 */
 	public PanelPrincipal(int Ax, int Bx) {
-		//frame2 = new JFrame();
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 720, 480);
 		contentPane = new JPanel();
@@ -120,59 +120,58 @@ public class PanelPrincipal extends JFrame {
 		JLabel lblNuevas = new JLabel("Inicio", SwingConstants.CENTER);
 		lblNuevas.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		
-		JLabel lblImagen = new JLabel("Imagen 0", SwingConstants.CENTER);
+		lblImagen = new JLabel("Imagen 0", SwingConstants.CENTER);
 		lblImagen.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				int altura = getHeight();
 				int anchura = getWidth();
 				Imagen i = new Imagen(altura, anchura);
 				i.setVisible(true);
-				//dispose();
 			}
 		});
 		lblImagen.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		JLabel lblImagen_2 = new JLabel("Imagen 3", SwingConstants.CENTER);
+		lblImagen_2 = new JLabel("Imagen 3", SwingConstants.CENTER);
 		lblImagen_2.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		JLabel label_1 = new JLabel("Imagen 1", SwingConstants.CENTER);
+	    label_1 = new JLabel("Imagen 1", SwingConstants.CENTER);
 		label_1.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		JLabel lblImagen_1 = new JLabel("Imagen 2", SwingConstants.CENTER);
+		lblImagen_1 = new JLabel("Imagen 2", SwingConstants.CENTER);
 		lblImagen_1.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		JLabel lblImagen_3 = new JLabel("Imagen 4", SwingConstants.CENTER);
+		lblImagen_3 = new JLabel("Imagen 4", SwingConstants.CENTER);
 		lblImagen_3.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		JLabel lblImagen_4 = new JLabel("Imagen 5", SwingConstants.CENTER);
+		lblImagen_4 = new JLabel("Imagen 5", SwingConstants.CENTER);
 		lblImagen_4.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		JLabel lblImagen_5 = new JLabel("Imagen 6", SwingConstants.CENTER);
+		lblImagen_5 = new JLabel("Imagen 6", SwingConstants.CENTER);
 		lblImagen_5.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		JLabel lblImagen_6 = new JLabel("Imagen 7", SwingConstants.CENTER);
+		lblImagen_6 = new JLabel("Imagen 7", SwingConstants.CENTER);
 		lblImagen_6.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		JLabel lblImagen_7 = new JLabel("Imagen 8", SwingConstants.CENTER);
+		lblImagen_7 = new JLabel("Imagen 8", SwingConstants.CENTER);
 		lblImagen_7.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		JLabel lblNombreImagen = new JLabel("Nombre Imagen", SwingConstants.CENTER);
+		lblNombreImagen = new JLabel("Nombre Imagen", SwingConstants.CENTER);
 		
-		JLabel label = new JLabel("Nombre Imagen", SwingConstants.CENTER);
+		label = new JLabel("Nombre Imagen", SwingConstants.CENTER);
 		
-		JLabel label_2 = new JLabel("Nombre Imagen", SwingConstants.CENTER);
+		label_2 = new JLabel("Nombre Imagen", SwingConstants.CENTER);
 		
-		JLabel label_3 = new JLabel("Nombre Imagen", SwingConstants.CENTER);
+		label_3 = new JLabel("Nombre Imagen", SwingConstants.CENTER);
 		
-		JLabel label_4 = new JLabel("Nombre Imagen", SwingConstants.CENTER);
+		label_4 = new JLabel("Nombre Imagen", SwingConstants.CENTER);
 		
-		JLabel label_5 = new JLabel("Nombre Imagen", SwingConstants.CENTER);
+		label_5 = new JLabel("Nombre Imagen", SwingConstants.CENTER);
 		
-		JLabel label_6 = new JLabel("Nombre Imagen", SwingConstants.CENTER);
+		label_6 = new JLabel("Nombre Imagen", SwingConstants.CENTER);
 		
-		JLabel label_7 = new JLabel("Nombre Imagen", SwingConstants.CENTER);
+		label_7 = new JLabel("Nombre Imagen", SwingConstants.CENTER);
 		
-		JLabel label_8 = new JLabel("Nombre Imagen", SwingConstants.CENTER);
+		label_8 = new JLabel("Nombre Imagen", SwingConstants.CENTER);
 		
 		JLabel label_9 = new JLabel("ArteApp", SwingConstants.CENTER);
 		label_9.setFont(new Font("SignPainter", Font.PLAIN, 40));

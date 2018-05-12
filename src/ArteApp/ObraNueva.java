@@ -217,7 +217,7 @@ public class ObraNueva extends JFrame {
 							BASE64Encoder encoder = new BASE64Encoder();
 							profilePhotoString = encoder.encode(imageInByte);
 							//ImageIO.write(imagen, "jpg", new File("src/Imagenes/" + nombreImagen + ".jpg"));
-							//ConnectionManager.newCanvas(nombreImagen, profilePhotoString);
+							ConnectionManager.newCanvas(nombreImagen, profilePhotoString);
 							hiloProgressBar.start();
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
