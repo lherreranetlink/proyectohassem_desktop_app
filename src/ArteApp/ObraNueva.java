@@ -27,6 +27,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JProgressBar;
 
+import connection.ConnectionManager;
+import constants.Constants;
+
 import sun.misc.BASE64Encoder;
 
 public class ObraNueva extends JFrame {
@@ -214,6 +217,7 @@ public class ObraNueva extends JFrame {
 							BASE64Encoder encoder = new BASE64Encoder();
 							profilePhotoString = encoder.encode(imageInByte);
 							//ImageIO.write(imagen, "jpg", new File("src/Imagenes/" + nombreImagen + ".jpg"));
+							//ConnectionManager.newCanvas(nombreImagen, profilePhotoString);
 							hiloProgressBar.start();
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
