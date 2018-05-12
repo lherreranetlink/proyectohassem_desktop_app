@@ -2,10 +2,11 @@ package constants;
 
 public class Constants {
 	
-	public static String ip_address = "localhost";
-	public static String http_port = "8000";
+	public static String ip_address = "192.168.43.224";
+	public static String http_port = "8080";
 	public static String ip_address_local = "";
 	public static String http_port_local = "";
+	public static String user_id_local = "";
 	
 	public static void setIpAddress(String ip_address) {
 		Constants.ip_address = ip_address; 
@@ -23,5 +24,8 @@ public class Constants {
 		Constants.http_port_local = http_port;
 	}
 	
+	public static void setUserId(String user_id){
+		Constants.user_id_local = user_id;
+	}
 	
 }

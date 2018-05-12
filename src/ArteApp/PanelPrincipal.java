@@ -31,7 +31,7 @@ public class PanelPrincipal extends JFrame {
 	public PanelPrincipal(int Ax, int Bx) {
 		//frame2 = new JFrame();
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, Bx, Ax);
+		setBounds(100, 100, 720, 480);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(204, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
