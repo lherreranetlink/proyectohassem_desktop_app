@@ -2,8 +2,8 @@ package constants;
 
 public class Constants {
 	
-	public static String ip_address = "localhost";
-	public static String http_port = "8000";
+	public static String ip_address = "192.168.1.70";
+	public static String http_port = "8080";
 	public static String ip_address_local = "";
 	public static String http_port_local = "";
 	

@@ -24,6 +24,7 @@ public class ConnectionManager {
 	
 	public static boolean Login(String nickName, String password, String pais) {
 		
+		System.out.println(Constants.ip_address);
 		String urlString = "http://" + Constants.ip_address + ":" + Constants.http_port + "/try_login?nick_name=" 
 		+ nickName + "&password="  + password + "&pais=" + pais;
 		System.out.println(urlString);
@@ -115,16 +116,13 @@ public class ConnectionManager {
 			
 			in.close();
 			JSONParser parser = new JSONParser();
+			System.out.println(response.toString());
 			Object obj = parser.parse(response.toString());
 			
 			JSONObject json = (JSONObject) obj;
 			String status = (String) json.get("status");
 			
 			if (status.equals("Success")) {
-				String ipAddress = (String) json.get("ip_address");
-				String httpPort = (String) json.get("http_port");
-				Constants.setIpAddress(ipAddress);
-				Constants.setHttpPort(httpPort);
 				return true;
 			} else {
 				String msg = (String) json.get("message");
