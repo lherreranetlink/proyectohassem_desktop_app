@@ -3,19 +3,38 @@ package ArteApp;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
+import JsonRead.JSONRead;
+import connection.ConnectionManager;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.ImageIcon;
 import java.awt.Color;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
+import javax.swing.Icon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -25,6 +44,9 @@ public class PanelPrincipal extends JFrame {
 	private JPanel contentPane;
 	JLabel lblImagen, label_1, lblImagen_1, lblImagen_2, lblImagen_3, lblImagen_4, lblImagen_5, lblImagen_6, lblImagen_7;
 	JLabel lblNombreImagen, label, label_2, label_3, label_4, label_5, label_6, label_7, label_8;
+	List<String> titulos = new ArrayList<String>();
+	List<String> textos64 = new ArrayList<String>();
+	String profilePhotoString = null;
 
 	/**
 	 * Create the frame.
@@ -120,13 +142,51 @@ public class PanelPrincipal extends JFrame {
 		JLabel lblNuevas = new JLabel("Inicio", SwingConstants.CENTER);
 		lblNuevas.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		
-		lblImagen = new JLabel("Imagen 0", SwingConstants.CENTER);
+		lblImagen = new JLabel("", SwingConstants.CENTER);
+		lblImagen.setIcon(new ImageIcon(PanelPrincipal.class.getResource("/botones/icons8-help.png")));
 		lblImagen.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				/*
 				int altura = getHeight();
 				int anchura = getWidth();
 				Imagen i = new Imagen(altura, anchura);
 				i.setVisible(true);
+				*/
+				ConnectionManager.getTop10Images();
+				
+				JsonParser parser = new JsonParser();
+		        FileReader fr;
+				try {
+					fr = new FileReader("imagenes.json");
+					
+					JsonElement datos = parser.parse(fr);
+					titulos = JSONRead.getTitulos(datos);
+					textos64 = JSONRead.getTextos64();
+					
+					System.out.println(titulos.get(0));
+					System.out.println(textos64.get(0));
+					
+					//Decodificar la imagen y agregarla a una etiqueta/////////////////////
+					byte[] decoder = Base64.getDecoder().decode(textos64.get(0));
+					ByteArrayInputStream bis = new ByteArrayInputStream(decoder);
+					BufferedImage image = null;
+					image = ImageIO.read(bis);
+					bis.close();
+					ImageIcon fott = new ImageIcon(image);
+					Icon iconot = new ImageIcon(fott.getImage().getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_DEFAULT));
+					lblImagen.setIcon(iconot);
+					
+					lblNombreImagen.setText(titulos.get(0));
+					//////////////////////////////////////////////////////////////////////
+					
+					
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		lblImagen.setBorder(BorderFactory.createLineBorder(Color.black));

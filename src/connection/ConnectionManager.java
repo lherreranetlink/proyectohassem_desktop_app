@@ -227,11 +227,14 @@ public class ConnectionManager {
 	
 	public static JSONObject getTop10Images()
 	{
-		String urlString = "http://" + Constants.ip_address_local + ":" + Constants.http_port_local + "/get_top_10";
+		String urlString = "http://" + Constants.ip_address_local + ":" + Constants.http_port_local + "/obras/get_top_10";
 		try {
 			URL url;
 			url = new URL(urlString);
-			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			
+			//System.out.println(urlString);
+			
+			HttpURLConnection con = (HttpURLConnection)url.openConnection();
 			con.setRequestMethod("GET");
 			int responseCode = con.getResponseCode();
 			
@@ -246,8 +249,14 @@ public class ConnectionManager {
 					response.append(inputLine);
 				
 				in.close();
-				System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("console.out")), true));
-				System.out.println(response);
+				
+				PrintStream stdout = System.out;
+				System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("imagenes.json")), true));
+				System.out.print(response);
+				System.setOut(stdout); 
+				
+				
+				
 				/*JSONParser parser = new JSONParser();
 				Object obj = parser.parse(response.toString());
 				

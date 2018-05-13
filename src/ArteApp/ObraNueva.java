@@ -28,8 +28,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JProgressBar;
 
 import connection.ConnectionManager;
-import constants.Constants;
-
 import sun.misc.BASE64Encoder;
 
 public class ObraNueva extends JFrame {
