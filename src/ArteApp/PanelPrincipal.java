@@ -37,23 +37,38 @@ import javax.swing.GroupLayout;
 import javax.swing.Icon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class PanelPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	JLabel lblImagen, label_1, lblImagen_1, lblImagen_2, lblImagen_3, lblImagen_4, lblImagen_5, lblImagen_6, lblImagen_7;
-	JLabel lblNombreImagen, label, label_2, label_3, label_4, label_5, label_6, label_7, label_8;
-	List<String> titulos = new ArrayList<String>();
-	List<String> textos64 = new ArrayList<String>();
+	static JLabel lblImagen, label_1, lblImagen_1, lblImagen_2, lblImagen_3, lblImagen_4, lblImagen_5, lblImagen_6, lblImagen_7;
+	static JLabel lblNombreImagen, label, label_2, label_3, label_4, label_5, label_6, label_7, label_8;
+	static List<String> titulos = new ArrayList<String>();
+	static List<String> textos64 = new ArrayList<String>();
+	static List<String> uID = new ArrayList<String>();
 	String profilePhotoString = null;
+	static int retam = 0;
+	private JButton buscar;
 
 	/**
 	 * Create the frame.
 	 */
 	public PanelPrincipal(int Ax, int Bx) {
+		addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				if(retam != 0)
+				{
+					cargarImagenes();
+				}
+				
+			}
+		});
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 720, 480);
+		setBounds(100, 100, 720, 520);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(204, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -74,8 +89,9 @@ public class PanelPrincipal extends JFrame {
 				int altura = getHeight();
 				int anchura = getWidth();
 				//System.out.println(anchura);
+				@SuppressWarnings("unused")
 				Obras ob = new Obras(altura, anchura);
-				ob.setVisible(true);
+				//ob.setVisible(true);
 				dispose();
 			}
 		});
@@ -98,8 +114,9 @@ public class PanelPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int altura = getHeight();
 				int anchura = getWidth();
+				@SuppressWarnings("unused")
 				Idolos i = new Idolos(altura, anchura);
-				i.setVisible(true);
+				//i.setVisible(true);
 				dispose();
 			}
 		});
@@ -110,8 +127,9 @@ public class PanelPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int altura = getHeight();
 				int anchura = getWidth();
+				@SuppressWarnings("unused")
 				Fans f = new Fans(altura, anchura);
-				f.setVisible(true);
+				//f.setVisible(true);
 				dispose();
 			}
 		});
@@ -133,9 +151,9 @@ public class PanelPrincipal extends JFrame {
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//frame2.dispose();
-				dispose();
 				Login l = new Login();
 				l.setVisible(true);
+				dispose();
 			}
 		});
 		
@@ -146,73 +164,118 @@ public class PanelPrincipal extends JFrame {
 		lblImagen.setIcon(new ImageIcon(PanelPrincipal.class.getResource("/botones/icons8-help.png")));
 		lblImagen.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				/*
+				
 				int altura = getHeight();
 				int anchura = getWidth();
-				Imagen i = new Imagen(altura, anchura);
+				Imagen i = new Imagen(altura, anchura, titulos.get(0), textos64.get(0), uID.get(0));
 				i.setVisible(true);
-				*/
-				ConnectionManager.getTop10Images();
 				
-				JsonParser parser = new JsonParser();
-		        FileReader fr;
-				try {
-					fr = new FileReader("imagenes.json");
-					
-					JsonElement datos = parser.parse(fr);
-					titulos = JSONRead.getTitulos(datos);
-					textos64 = JSONRead.getTextos64();
-					
-					System.out.println(titulos.get(0));
-					System.out.println(textos64.get(0));
-					
-					//Decodificar la imagen y agregarla a una etiqueta/////////////////////
-					byte[] decoder = Base64.getDecoder().decode(textos64.get(0));
-					ByteArrayInputStream bis = new ByteArrayInputStream(decoder);
-					BufferedImage image = null;
-					image = ImageIO.read(bis);
-					bis.close();
-					ImageIcon fott = new ImageIcon(image);
-					Icon iconot = new ImageIcon(fott.getImage().getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_DEFAULT));
-					lblImagen.setIcon(iconot);
-					
-					lblNombreImagen.setText(titulos.get(0));
-					//////////////////////////////////////////////////////////////////////
-					
-					
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 			}
 		});
 		lblImagen.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		lblImagen_2 = new JLabel("Imagen 3", SwingConstants.CENTER);
+		lblImagen_2 = new JLabel("", SwingConstants.CENTER);
+		lblImagen_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int altura = getHeight();
+				int anchura = getWidth();
+				@SuppressWarnings("unused")
+				Imagen i = new Imagen(altura, anchura, titulos.get(3), textos64.get(3), uID.get(3));
+				//i.setVisible(true);
+			}
+		});
 		lblImagen_2.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-	    label_1 = new JLabel("Imagen 1", SwingConstants.CENTER);
+	    label_1 = new JLabel("", SwingConstants.CENTER);
+	    label_1.addMouseListener(new MouseAdapter() {
+	    	@Override
+	    	public void mouseClicked(MouseEvent e) {
+	    		int altura = getHeight();
+				int anchura = getWidth();
+				@SuppressWarnings("unused")
+				Imagen i = new Imagen(altura, anchura, titulos.get(1), textos64.get(1), uID.get(1));
+				//i.setVisible(true);
+	    	}
+	    });
 		label_1.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		lblImagen_1 = new JLabel("Imagen 2", SwingConstants.CENTER);
+		lblImagen_1 = new JLabel("", SwingConstants.CENTER);
+		lblImagen_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int altura = getHeight();
+				int anchura = getWidth();
+				@SuppressWarnings("unused")
+				Imagen i = new Imagen(altura, anchura, titulos.get(2), textos64.get(2), uID.get(2));
+				//i.setVisible(true);
+			}
+		});
 		lblImagen_1.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		lblImagen_3 = new JLabel("Imagen 4", SwingConstants.CENTER);
+		lblImagen_3 = new JLabel("", SwingConstants.CENTER);
+		lblImagen_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int altura = getHeight();
+				int anchura = getWidth();
+				@SuppressWarnings("unused")
+				Imagen i = new Imagen(altura, anchura, titulos.get(4), textos64.get(4), uID.get(4));
+				//i.setVisible(true);
+			}
+		});
 		lblImagen_3.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		lblImagen_4 = new JLabel("Imagen 5", SwingConstants.CENTER);
+		lblImagen_4 = new JLabel("", SwingConstants.CENTER);
+		lblImagen_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int altura = getHeight();
+				int anchura = getWidth();
+				@SuppressWarnings("unused")
+				Imagen i = new Imagen(altura, anchura, titulos.get(5), textos64.get(5), uID.get(5));
+				//i.setVisible(true);
+			}
+		});
 		lblImagen_4.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		lblImagen_5 = new JLabel("Imagen 6", SwingConstants.CENTER);
+		lblImagen_5 = new JLabel("", SwingConstants.CENTER);
+		lblImagen_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int altura = getHeight();
+				int anchura = getWidth();
+				@SuppressWarnings("unused")
+				Imagen i = new Imagen(altura, anchura, titulos.get(6), textos64.get(6), uID.get(6));
+				//i.setVisible(true);
+			}
+		});
 		lblImagen_5.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		lblImagen_6 = new JLabel("Imagen 7", SwingConstants.CENTER);
+		lblImagen_6 = new JLabel("", SwingConstants.CENTER);
+		lblImagen_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int altura = getHeight();
+				int anchura = getWidth();
+				@SuppressWarnings("unused")
+				Imagen i = new Imagen(altura, anchura, titulos.get(7), textos64.get(7), uID.get(7));
+				//i.setVisible(true);
+			}
+		});
 		lblImagen_6.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		lblImagen_7 = new JLabel("Imagen 8", SwingConstants.CENTER);
+		lblImagen_7 = new JLabel("", SwingConstants.CENTER);
+		lblImagen_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int altura = getHeight();
+				int anchura = getWidth();
+				@SuppressWarnings("unused")
+				Imagen i = new Imagen(altura, anchura, titulos.get(8), textos64.get(8), uID.get(8));
+				//i.setVisible(true);
+			}
+		});
 		lblImagen_7.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		lblNombreImagen = new JLabel("Nombre Imagen", SwingConstants.CENTER);
@@ -233,33 +296,8 @@ public class PanelPrincipal extends JFrame {
 		
 		label_8 = new JLabel("Nombre Imagen", SwingConstants.CENTER);
 		
-		JLabel label_9 = new JLabel("ArteApp", SwingConstants.CENTER);
-		label_9.setFont(new Font("SignPainter", Font.PLAIN, 40));
-		
 		JLabel label_10 = new JLabel("", SwingConstants.CENTER);
-		label_10.setIcon(new ImageIcon(PanelPrincipal.class.getResource("/botones/icons8-modern_art.png")));
-		
-		final JLabel label_11 = new JLabel("", SwingConstants.CENTER);
-		label_11.setIcon(new ImageIcon(PanelPrincipal.class.getResource("/botones/icons8-left_circular.png")));
-		label_11.addMouseListener(new MouseAdapter() {
-			public void mouseEntered(MouseEvent e) {
-				label_11.setIcon(new ImageIcon(PanelPrincipal.class.getResource("/botones/icons8-left_round.png")));
-			}
-			public void mouseExited(MouseEvent e) {
-				label_11.setIcon(new ImageIcon(PanelPrincipal.class.getResource("/botones/icons8-left_circular.png")));
-			}
-		});
-		
-		final JLabel label_12 = new JLabel("", SwingConstants.CENTER);
-		label_12.setIcon(new ImageIcon(PanelPrincipal.class.getResource("/botones/icons8-right_circular.png")));
-		label_12.addMouseListener(new MouseAdapter() {
-			public void mouseEntered(MouseEvent e) {
-				label_12.setIcon(new ImageIcon(PanelPrincipal.class.getResource("/botones/icons8-right_round.png")));
-			}
-			public void mouseExited(MouseEvent e) {
-				label_12.setIcon(new ImageIcon(PanelPrincipal.class.getResource("/botones/icons8-right_circular.png")));
-			}
-		});
+		label_10.setIcon(new ImageIcon(PanelPrincipal.class.getResource("/botones/logop.png")));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -267,31 +305,53 @@ public class PanelPrincipal extends JFrame {
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+				.addComponent(panel, GroupLayout.PREFERRED_SIZE, 461, Short.MAX_VALUE)
 		);
+		
+		buscar = new JButton("Buscar");
+		buscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int altura = getHeight();
+				int anchura = getWidth();
+				Buscar b = new Buscar(altura, anchura);
+				b.setVisible(true);
+				dispose();
+			}
+		});
+		buscar.setIcon(new ImageIcon(PanelPrincipal.class.getResource("/botones/icons8-search.png")));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(6)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(label_9, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblHerramientas, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(10)
-							.addComponent(label_10))
-						.addComponent(btnMisObras, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnAadirNuevaObra, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnIdolos, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnMisFans, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnTops, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnSalir, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+							.addGap(6)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(10)
+									.addComponent(label_10))
+								.addComponent(btnMisObras, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(10)
-							.addComponent(label_11, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-							.addGap(47)
-							.addComponent(label_12, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 10, Short.MAX_VALUE)))
+							.addContainerGap()
+							.addComponent(btnMisFans, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnIdolos, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnAadirNuevaObra, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnTops, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(buscar, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnSalir, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblHerramientas, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)))
 					.addGap(84)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblNuevas, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
@@ -339,69 +399,201 @@ public class PanelPrincipal extends JFrame {
 					.addGap(106))
 		);
 		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
+			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(6)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(44)
-							.addComponent(label_9, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE))
+							.addGap(6)
+							.addComponent(label_10, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblHerramientas)
+							.addGap(8)
+							.addComponent(btnMisObras, GroupLayout.PREFERRED_SIZE, 49, Short.MAX_VALUE)
+							.addGap(3)
+							.addComponent(buscar, GroupLayout.PREFERRED_SIZE, 41, Short.MAX_VALUE)
+							.addGap(1)
+							.addComponent(btnAadirNuevaObra, GroupLayout.PREFERRED_SIZE, 49, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnIdolos, GroupLayout.PREFERRED_SIZE, 49, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnMisFans, GroupLayout.PREFERRED_SIZE, 49, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnTops, GroupLayout.PREFERRED_SIZE, 49, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnSalir, GroupLayout.PREFERRED_SIZE, 47, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(96)
-							.addComponent(lblHerramientas, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addComponent(label_10, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE))
-					.addGap(2)
-					.addComponent(btnMisObras, GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
-					.addGap(2)
-					.addComponent(btnAadirNuevaObra, GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
-					.addGap(2)
-					.addComponent(btnIdolos, GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
-					.addGap(3)
-					.addComponent(btnMisFans, GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
-					.addComponent(btnTops, GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
-					.addComponent(btnSalir, GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(label_11, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(label_12, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-					.addGap(6))
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(19)
-					.addComponent(lblNuevas, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-					.addGap(12)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblImagen, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-						.addComponent(label_1, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-						.addComponent(lblImagen_1, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
-					.addGap(5)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(lblNombreImagen)
-						.addComponent(label)
-						.addComponent(label_2))
-					.addGap(2)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblImagen_2, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-						.addComponent(lblImagen_3, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-						.addComponent(lblImagen_4, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
-					.addGap(1)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(label_3)
-						.addComponent(label_4)
-						.addComponent(label_5))
-					.addGap(2)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblImagen_5, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-						.addComponent(lblImagen_6, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-						.addComponent(lblImagen_7, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
-					.addGap(5)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(label_6)
-						.addComponent(label_7)
-						.addComponent(label_8))
-					.addGap(17))
+							.addGap(19)
+							.addComponent(lblNuevas, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+							.addGap(12)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblImagen, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+								.addComponent(label_1, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+								.addComponent(lblImagen_1, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+							.addGap(5)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(lblNombreImagen)
+								.addComponent(label)
+								.addComponent(label_2))
+							.addGap(2)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblImagen_2, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+								.addComponent(lblImagen_3, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+								.addComponent(lblImagen_4, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))
+							.addGap(1)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(label_3)
+								.addComponent(label_4)
+								.addComponent(label_5))
+							.addGap(2)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblImagen_5, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+								.addComponent(lblImagen_6, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+								.addComponent(lblImagen_7, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))
+							.addGap(5)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(label_6)
+								.addComponent(label_7)
+								.addComponent(label_8))))
+					.addGap(7))
 		);
 		panel.setLayout(gl_panel);
 		contentPane.setLayout(gl_contentPane);
-		//setVisible(true);
+		cargaDelJson();
+		setVisible(true);
+		cargarImagenes();
 		//frame2.setVisible(true);
+	}
+	
+	public static void cargaDelJson() {
+		ConnectionManager.imagenesAzar();
+		JSONRead JR = new JSONRead();
+		JsonParser parser = new JsonParser();
+        FileReader fr;
+        try {
+			fr = new FileReader("azar.json");
+			JsonElement datos = parser.parse(fr);
+			titulos = JR.getTitulos(datos);
+			textos64 = JR.getTextos64();
+			uID = JR.getUsuarioIDs();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void cargarImagenes() {
+		//System.out.println(titulos.get(0));
+		//System.out.println(textos64.get(0));
+		retam = 1;
+		
+		//Decodificar la imagen y agregarla a una etiqueta/////////////////////
+		byte[] decoder = Base64.getDecoder().decode(textos64.get(0));
+		ByteArrayInputStream bis = new ByteArrayInputStream(decoder);
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(bis);
+			
+			bis.close();
+			ImageIcon fott = new ImageIcon(image);
+			Icon iconot = new ImageIcon(fott.getImage().getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_DEFAULT));
+			
+			lblImagen.setIcon(iconot);
+			lblNombreImagen.setText(titulos.get(0));
+			
+			decoder = Base64.getDecoder().decode(textos64.get(1));
+			bis = new ByteArrayInputStream(decoder);
+			image = null;
+			image = ImageIO.read(bis);
+			bis.close();
+			fott = new ImageIcon(image);
+			iconot = new ImageIcon(fott.getImage().getScaledInstance(label_1.getWidth(), label_1.getHeight(), Image.SCALE_DEFAULT));
+			
+			label_1.setIcon(iconot);
+			label.setText(titulos.get(1));
+			
+			decoder = Base64.getDecoder().decode(textos64.get(2));
+			bis = new ByteArrayInputStream(decoder);
+			image = null;
+			image = ImageIO.read(bis);
+			bis.close();
+			fott = new ImageIcon(image);
+			iconot = new ImageIcon(fott.getImage().getScaledInstance(lblImagen_1.getWidth(), lblImagen_1.getHeight(), Image.SCALE_DEFAULT));
+			
+			lblImagen_1.setIcon(iconot);
+			label_2.setText(titulos.get(2));
+			
+			decoder = Base64.getDecoder().decode(textos64.get(3));
+			bis = new ByteArrayInputStream(decoder);
+			image = null;
+			image = ImageIO.read(bis);
+			bis.close();
+			fott = new ImageIcon(image);
+			iconot = new ImageIcon(fott.getImage().getScaledInstance(lblImagen_2.getWidth(), lblImagen_2.getHeight(), Image.SCALE_DEFAULT));
+			
+			lblImagen_2.setIcon(iconot);
+			label_3.setText(titulos.get(3));
+			
+			decoder = Base64.getDecoder().decode(textos64.get(4));
+			bis = new ByteArrayInputStream(decoder);
+			image = null;
+			image = ImageIO.read(bis);
+			bis.close();
+			fott = new ImageIcon(image);
+			iconot = new ImageIcon(fott.getImage().getScaledInstance(lblImagen_3.getWidth(), lblImagen_3.getHeight(), Image.SCALE_DEFAULT));
+			
+			lblImagen_3.setIcon(iconot);
+			label_4.setText(titulos.get(4));
+			
+			decoder = Base64.getDecoder().decode(textos64.get(5));
+			bis = new ByteArrayInputStream(decoder);
+			image = null;
+			image = ImageIO.read(bis);
+			bis.close();
+			fott = new ImageIcon(image);
+			iconot = new ImageIcon(fott.getImage().getScaledInstance(lblImagen_4.getWidth(), lblImagen_4.getHeight(), Image.SCALE_DEFAULT));
+			
+			lblImagen_4.setIcon(iconot);
+			label_5.setText(titulos.get(5));
+			
+			decoder = Base64.getDecoder().decode(textos64.get(6));
+			bis = new ByteArrayInputStream(decoder);
+			image = null;
+			image = ImageIO.read(bis);
+			bis.close();
+			fott = new ImageIcon(image);
+			iconot = new ImageIcon(fott.getImage().getScaledInstance(lblImagen_5.getWidth(), lblImagen_5.getHeight(), Image.SCALE_DEFAULT));
+			
+			lblImagen_5.setIcon(iconot);
+			label_6.setText(titulos.get(6));
+			
+			decoder = Base64.getDecoder().decode(textos64.get(7));
+			bis = new ByteArrayInputStream(decoder);
+			image = null;
+			image = ImageIO.read(bis);
+			bis.close();
+			fott = new ImageIcon(image);
+			iconot = new ImageIcon(fott.getImage().getScaledInstance(lblImagen_6.getWidth(), lblImagen_6.getHeight(), Image.SCALE_DEFAULT));
+			
+			lblImagen_6.setIcon(iconot);
+			label_7.setText(titulos.get(7));
+			
+			decoder = Base64.getDecoder().decode(textos64.get(8));
+			bis = new ByteArrayInputStream(decoder);
+			image = null;
+			image = ImageIO.read(bis);
+			bis.close();
+			fott = new ImageIcon(image);
+			iconot = new ImageIcon(fott.getImage().getScaledInstance(lblImagen_7.getWidth(), lblImagen_7.getHeight(), Image.SCALE_DEFAULT));
+			
+			lblImagen_7.setIcon(iconot);
+			label_8.setText(titulos.get(8));
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//////////////////////////////////////////////////////////////////////
 	}
 }

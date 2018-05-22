@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="ArteApp.ObraNueva" project="proyectohassem_desktop_app-master" 
+    file="/proyectohassem_desktop_app-master/src/ArteApp/ObraNueva.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="263" width="171" x="689" y="-113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="ArteApp.Fans" project="proyectohassem_desktop_app-master" 
+    file="/proyectohassem_desktop_app-master/src/ArteApp/Fans.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="119" width="145" x="900" y="-113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="ArteApp.Idolos" project="proyectohassem_desktop_app-master" 
+    file="/proyectohassem_desktop_app-master/src/ArteApp/Idolos.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="119" width="145" x="1085" y="-113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="ArteApp.Imagen" project="proyectohassem_desktop_app-master" 
+    file="/proyectohassem_desktop_app-master/src/ArteApp/Imagen.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="191" width="187" x="1270" y="-113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="ArteApp.chosser" project="proyectohassem_desktop_app-master" 
+    file="/proyectohassem_desktop_app-master/src/ArteApp/chosser.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="155" width="145" x="1497" y="-113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="ArteApp.Registro" project="proyectohassem_desktop_app-master" 
+    file="/proyectohassem_desktop_app-master/src/ArteApp/Registro.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="371" width="177" x="1682" y="-113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="ArteApp.Obras" project="proyectohassem_desktop_app-master" 
+    file="/proyectohassem_desktop_app-master/src/ArteApp/Obras.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="551" width="147" x="1899" y="-113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="ArteApp.PanelPrincipal" project="proyectohassem_desktop_app-master" 
+    file="/proyectohassem_desktop_app-master/src/ArteApp/PanelPrincipal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="569" width="163" x="2086" y="-113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="ArteApp.Buscar" project="proyectohassem_desktop_app-master" 
+    file="/proyectohassem_desktop_app-master/src/ArteApp/Buscar.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="335" width="151" x="2289" y="-113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="ArteApp.Login" project="proyectohassem_desktop_app-master" 
+    file="/proyectohassem_desktop_app-master/src/ArteApp/Login.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="209" width="237" x="2480" y="-113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="ArteApp.TOP" project="proyectohassem_desktop_app-master" 
+    file="/proyectohassem_desktop_app-master/src/ArteApp/TOP.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="119" width="145" x="2757" y="-113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="connection.ConnectionManager" project="proyectohassem_desktop_app-master" 
+    file="/proyectohassem_desktop_app-master/src/connection/ConnectionManager.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="857" y="309"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="constants.Constants" project="proyectohassem_desktop_app-master" 
+    file="/proyectohassem_desktop_app-master/src/constants/Constants.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1157" y="354"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="JsonRead.JSONRead" project="proyectohassem_desktop_app-master" 
+    file="/proyectohassem_desktop_app-master/src/JsonRead/JSONRead.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1416" y="399"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

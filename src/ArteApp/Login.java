@@ -105,8 +105,9 @@ public class Login extends JFrame {
 				String pais = comboBoxPaises.getSelectedItem().toString();
 				
 				if (ConnectionManager.Login(nickName, pass, pais)) {
+					@SuppressWarnings("unused")
 					PanelPrincipal p = new PanelPrincipal(480, 720);
-					p.setVisible(true);
+					//p.setVisible(true);
 					dispose();
 				}
 			}

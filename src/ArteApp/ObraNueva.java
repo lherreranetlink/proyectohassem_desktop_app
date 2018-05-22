@@ -17,8 +17,6 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ImageIcon;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -77,7 +75,7 @@ public class ObraNueva extends JFrame {
 		{
 			Ax = 489;
 		}
-		setBounds(100, 100, Bx, Ax);
+		setBounds(100, 100, 720, 520);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(204, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -87,14 +85,11 @@ public class ObraNueva extends JFrame {
 		customPanel.setOpaque(false);
 		customPanel.setBackground(new Color(204, 255, 255));
 		
-		JLabel label_2 = new JLabel("ArteApp", SwingConstants.CENTER);
-		label_2.setFont(new Font("SignPainter", Font.PLAIN, 40));
-		
 		JLabel label_3 = new JLabel("Herramientas", SwingConstants.CENTER);
 		label_3.setForeground(Color.BLUE);
 		
 		JLabel label_4 = new JLabel("", SwingConstants.CENTER);
-		label_4.setIcon(new ImageIcon(ObraNueva.class.getResource("/botones/icons8-modern_art.png")));
+		label_4.setIcon(new ImageIcon(ObraNueva.class.getResource("/botones/logop.png")));
 		
 		JButton button_1 = new JButton("Inicio");
 		button_1.addActionListener(new ActionListener() {
@@ -125,8 +120,9 @@ public class ObraNueva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int altura = getHeight();
 				int anchura = getWidth();
+				@SuppressWarnings("unused")
 				Idolos i = new Idolos(altura, anchura);
-				i.setVisible(true);
+				//i.setVisible(true);
 				dispose();
 			}
 		});
@@ -137,8 +133,9 @@ public class ObraNueva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int altura = getHeight();
 				int anchura = getWidth();
+				@SuppressWarnings("unused")
 				Fans f = new Fans(altura, anchura);
-				f.setVisible(true);
+				//f.setVisible(true);
 				dispose();
 			}
 		});
@@ -165,31 +162,6 @@ public class ObraNueva extends JFrame {
 			}
 		});
 		button_12.setIcon(new ImageIcon(ObraNueva.class.getResource("/botones/icons8-export.png")));
-		
-		final JLabel label_5 = new JLabel("", SwingConstants.CENTER);
-		label_5.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				//click;
-			}
-			public void mouseExited(MouseEvent e) {
-				label_5.setIcon(new ImageIcon(ObraNueva.class.getResource("/botones/icons8-left_circular.png")));
-			}
-			public void mouseEntered(MouseEvent e) {
-				label_5.setIcon(new ImageIcon(ObraNueva.class.getResource("/botones/icons8-left_round.png")));
-			}
-		});
-		label_5.setIcon(new ImageIcon(ObraNueva.class.getResource("/botones/icons8-left_circular.png")));
-		
-		final JLabel label_6 = new JLabel("", SwingConstants.CENTER);
-		label_6.addMouseListener(new MouseAdapter() {
-			public void mouseEntered(MouseEvent e) {
-				label_6.setIcon(new ImageIcon(ObraNueva.class.getResource("/botones/icons8-right_round.png")));
-			}
-			public void mouseExited(MouseEvent e) {
-				label_6.setIcon(new ImageIcon(ObraNueva.class.getResource("/botones/icons8-right_circular.png")));
-			}
-		});
-		label_6.setIcon(new ImageIcon(ObraNueva.class.getResource("/botones/icons8-right_circular.png")));
 		
 		JLabel lblAadirNuevaObra_1 = new JLabel("Añadir Nueva Obra", SwingConstants.CENTER);
 		lblAadirNuevaObra_1.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
@@ -258,29 +230,51 @@ public class ObraNueva extends JFrame {
 			}
 		});
 		
+		JButton button = new JButton("Buscar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int altura = getHeight();
+				int anchura = getWidth();
+				Buscar b = new Buscar(altura, anchura);
+				b.setVisible(true);
+				dispose();
+			}
+		});
+		button.setIcon(new ImageIcon(ObraNueva.class.getResource("/botones/icons8-search.png")));
+		
 	    
 		GroupLayout gl_customPanel = new GroupLayout(customPanel);
 		gl_customPanel.setHorizontalGroup(
 			gl_customPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_customPanel.createSequentialGroup()
-					.addGap(6)
-					.addGroup(gl_customPanel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
-						.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_customPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_customPanel.createSequentialGroup()
-							.addGap(10)
-							.addComponent(label_4))
-						.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnMisObras, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-						.addComponent(button_9, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-						.addComponent(button_10, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-						.addComponent(button_11, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-						.addComponent(button_12, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+							.addGap(6)
+							.addGroup(gl_customPanel.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_customPanel.createSequentialGroup()
+									.addGap(10)
+									.addComponent(label_4))
+								.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_customPanel.createSequentialGroup()
-							.addGap(10)
-							.addComponent(label_5, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-							.addGap(47)
-							.addComponent(label_6, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)))
+							.addContainerGap()
+							.addComponent(button_12, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_customPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(button_11, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_customPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(button_10, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_customPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(button_9, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_customPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnMisObras, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_customPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(button, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_customPanel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_customPanel.createSequentialGroup()
 							.addGap(84)
@@ -288,9 +282,9 @@ public class ObraNueva extends JFrame {
 							.addGap(106))
 						.addGroup(gl_customPanel.createSequentialGroup()
 							.addGap(34)
-							.addGroup(gl_customPanel.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_customPanel.createParallelGroup(Alignment.TRAILING)
 								.addComponent(fileChooser, GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
-								.addGroup(Alignment.TRAILING, gl_customPanel.createSequentialGroup()
+								.addGroup(gl_customPanel.createSequentialGroup()
 									.addComponent(titulo, GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(btnSubir, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE))
@@ -303,46 +297,45 @@ public class ObraNueva extends JFrame {
 							.addGap(45))))
 		);
 		gl_customPanel.setVerticalGroup(
-			gl_customPanel.createParallelGroup(Alignment.LEADING)
+			gl_customPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_customPanel.createSequentialGroup()
-					.addGap(6)
-					.addGroup(gl_customPanel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_customPanel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_customPanel.createSequentialGroup()
-							.addGap(44)
-							.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE))
-						.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_customPanel.createSequentialGroup()
-							.addGap(74)
-							.addGroup(gl_customPanel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblArchivoCargado)
-								.addComponent(lblNa))
+							.addGap(6)
+							.addGroup(gl_customPanel.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_customPanel.createSequentialGroup()
+									.addGap(74)
+									.addGroup(gl_customPanel.createParallelGroup(Alignment.BASELINE)
+										.addComponent(lblArchivoCargado)
+										.addComponent(lblNa))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_customPanel.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(progressBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_customPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(progressBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(label_3, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
-					.addGap(2)
-					.addComponent(btnMisObras, GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
-					.addGap(2)
-					.addComponent(button_9, GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
-					.addGap(3)
-					.addComponent(button_10, GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
-					.addComponent(button_11, GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
-					.addComponent(button_12, GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
-					.addGroup(gl_customPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(label_5, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(label_6, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-					.addGap(6))
-				.addGroup(gl_customPanel.createSequentialGroup()
-					.addGap(19)
-					.addComponent(lblAadirNuevaObra_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(gl_customPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(titulo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnSubir))
-					.addGap(40)
-					.addComponent(fileChooser, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+							.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 50, Short.MAX_VALUE)
+							.addGap(8)
+							.addComponent(button, GroupLayout.PREFERRED_SIZE, 40, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnMisObras, GroupLayout.PREFERRED_SIZE, 48, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(button_9, GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(button_10, GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(button_11, GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(button_12, GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE))
+						.addGroup(gl_customPanel.createSequentialGroup()
+							.addGap(19)
+							.addComponent(lblAadirNuevaObra_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addGroup(gl_customPanel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(titulo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnSubir))
+							.addGap(40)
+							.addComponent(fileChooser, GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		customPanel.setLayout(gl_customPanel);
